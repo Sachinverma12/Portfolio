@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sachin Verma — Developer & AI Enthusiast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.3/index.css">
+<style>
+:root{
+  --background: 260 87% 3%;
+  --foreground: 40 6% 95%;
+  --hero-sub: 40 6% 82%;
+  --indigo:#6366f1;
+  --purple:#a855f7;
+  --amber:#fcd34d;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  background:hsl(var(--background));
+  color:hsl(var(--foreground));
+  font-family:'Geist Sans','Inter',-apple-system,system-ui,sans-serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:inherit; text-decoration:none; }
+.mono{ font-family:'JetBrains Mono',monospace; }
+.display{ font-family:'General Sans','Geist Sans',sans-serif; }
+::selection{ background:var(--indigo); color:#0a0a0f; }
+
+/* ===== Liquid glass ===== */
+.liquid-glass{
+  background: rgba(255,255,255,.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  border:none;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.1);
+  position:relative;
+  overflow:hidden;
+}
+.liquid-glass::before{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit;
+  padding:1.4px;
+  background:linear-gradient(180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,.15) 80%, rgba(255,255,255,.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events:none;
+}
+
+.btn-hero{
+  font-family:'Geist Sans',sans-serif; font-size:15px; font-weight:500;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(10px);
+  color:hsl(var(--foreground));
+  cursor:pointer;
+  transition: background .25s, border-color .25s, transform .2s;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-hero:hover{ background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.28); transform:translateY(-1px); }
+
+/* ===== Hero wrapper ===== */
+.hero-wrap{
+  position:relative; overflow:hidden; min-height:100vh;
+}
+.hero-video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; opacity:0; z-index:0;
+}
+.hero-blur-shape{
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:984px; height:527px; max-width:90vw;
+  opacity:.55; background:#050206; filter:blur(82px);
+  pointer-events:none; z-index:1;
+}
+.hero-section{
+  position:relative; z-index:2; min-height:100vh;
+  display:flex; flex-direction:column; overflow:visible;
+}
+
+/* ===== Navbar ===== */
+nav{
+  width:100%; padding:20px 32px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:relative; z-index:5;
+}
+.nav-logo{
+  display:flex; align-items:center; gap:10px;
+}
+.nav-logo-badge{
+  width:32px; height:32px; border-radius:9px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:14px;
+  background:linear-gradient(135deg,var(--indigo),var(--purple));
+  color:#fff;
+}
+.nav-logo-text{ font-family:'General Sans',sans-serif; font-weight:600; font-size:15px; }
+
+.nav-center{ display:flex; align-items:center; gap:28px; }
+.nav-center button{
+  background:none; border:none; cursor:pointer;
+  color:hsla(var(--foreground)/.9); font-family:'Geist Sans',sans-serif;
+  font-size:14.5px; transition:color .2s;
+}
+.nav-center button:hover{ color:hsl(var(--indigo)); }
+
+.nav-divider{
+  height:1px; margin-top:3px;
+  background:linear-gradient(to right, transparent, hsla(var(--foreground)/.2), transparent);
+}
+
+/* ===== Hero content ===== */
+.hero-content{
+  flex:1; display:flex; align-items:center; justify-content:center;
+  flex-direction:column; text-align:center; padding:0 24px;
+  position:relative; z-index:5;
+}
+.hero-headline{
+  font-family:'General Sans',sans-serif;
+  font-weight:400;
+  font-size:clamp(56px, 16vw, 220px);
+  line-height:1.02; letter-spacing:-0.024em;
+}
+.hero-headline-sub{
+  font-size:clamp(22px, 5vw, 64px);
+  margin-top:4px;
+}
+.hero-headline .plain{
+  color:#ffffff;
+  font-weight:600;
+  text-shadow:0 0 60px rgba(165,150,255,.35);
+}
+.hero-headline .grad{
+  background-image:linear-gradient(to left, var(--indigo), var(--purple), var(--amber));
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+}
+.hero-sub{
+  color:hsla(var(--hero-sub)/1);
+  font-size:18px; line-height:2rem;
+  max-width:28rem; margin-top:9px; opacity:.95;
+}
+.hero-cta{
+  margin-top:25px; padding:24px 29px;
+}
+
+/* ===== Marquee ===== */
+.marquee-row{
+  position:relative; z-index:5;
+  max-width:1080px; margin:0 auto; width:100%;
+  padding:0 24px 40px;
+  display:flex; align-items:center; gap:48px;
+  flex-wrap:wrap;
+}
+.marquee-label{
+  font-size:14px; color:hsla(var(--foreground)/.68); line-height:1.4;
+  flex-shrink:0;
+}
+.marquee-mask{
+  flex:1; min-width:220px; overflow:hidden;
+  mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track{
+  display:flex; align-items:center; gap:64px;
+  width:max-content;
+  animation:marquee 20s linear infinite;
+}
+@keyframes marquee{
+  from{ transform:translateX(0%); }
+  to{ transform:translateX(-50%); }
+}
+.marquee-item{ display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.marquee-icon{
+  width:24px; height:24px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:hsl(var(--foreground));
+}
+.marquee-name{ font-family:'Geist Sans',sans-serif; font-weight:600; font-size:16px; color:hsl(var(--foreground)); white-space:nowrap; }
+
+/* ===== Body sections (terminal-inspired, recolored to match hero system) ===== */
+main{ max-width:1000px; margin:0 auto; padding:0 24px; }
+section.page-sec{ padding:96px 0 80px; }
+.sec-meta{ font-family:'JetBrains Mono',monospace; font-size:13px; color:hsla(var(--foreground)/.62); margin-bottom:6px; }
+.sec-meta .kw{ color:var(--indigo); }
+.sec-title{ font-family:'General Sans',sans-serif; font-size:clamp(28px,4vw,38px); font-weight:600; margin-bottom:32px; }
+
+.about-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:36px; }
+@media(max-width:720px){ .about-grid{ grid-template-columns:1fr; } }
+.about-text{ color:hsla(var(--foreground)/.85); max-width:62ch; font-size:15.5px; }
+.about-text p+p{ margin-top:16px; }
+.about-text strong{ color:hsl(var(--foreground)); }
+
+.glass-card{
+  background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07);
+  border-radius:14px; padding:22px;
+  transition:border-color .25s, transform .25s, box-shadow .25s;
+}
+.glass-card:hover{ border-color:rgba(99,102,241,.35); transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.35); }
+
+.skills-cat{ margin-bottom:18px; } .skills-cat:last-child{ margin-bottom:0; }
+.skills-cat-label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:hsla(var(--foreground)/.62); text-transform:uppercase; letter-spacing:.06em; margin-bottom:9px; }
+.skills{ display:flex; flex-wrap:wrap; gap:7px; }
+.skill-chip{
+  font-family:'JetBrains Mono',monospace; font-size:12px; padding:5px 12px; border-radius:6px;
+  background:rgba(99,102,241,.09); border:1px solid rgba(99,102,241,.2); color:#c7cbfd;
+}
+
+.info-cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:620px){ .info-cards{ grid-template-columns:1fr; } }
+.info-card h4{ font-size:15.5px; font-weight:600; margin-bottom:4px; font-family:'General Sans',sans-serif; }
+.info-card .sub{ font-size:12.5px; color:hsla(var(--foreground)/.62); font-family:'JetBrains Mono',monospace; }
+.info-card .desc{ font-size:14px; color:hsla(var(--foreground)/.78); margin-top:8px; }
+
+.project-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:680px){ .project-grid{ grid-template-columns:1fr; } }
+.project-name{ font-family:'General Sans',sans-serif; font-size:18px; font-weight:600; margin-bottom:8px; }
+.project-name .ext{ background-image:linear-gradient(to left,var(--indigo),var(--purple)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.project-desc{ font-size:14px; color:hsla(var(--foreground)/.82); margin-bottom:14px; }
+.project-techs{ display:flex; flex-wrap:wrap; gap:6px; }
+.project-tech{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#e0bbfd; background:rgba(168,85,247,.09); padding:3px 10px; border-radius:4px; }
+.project-tech::before{ content:'#'; color:hsla(var(--foreground)/.4); }
+.project-link{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-top:14px; font-family:'Geist Sans',sans-serif; font-size:13px; font-weight:500;
+  color:var(--indigo); transition:color .2s;
+}
+.project-link:hover{ color:var(--purple); }
+
+.lead-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:600px){ .lead-grid{ grid-template-columns:1fr; } }
+.lead-item{ display:flex; align-items:center; gap:12px; padding:14px 16px; }
+.lead-icon{ font-size:19px; width:36px; height:36px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:rgba(99,102,241,.09); border-radius:9px; }
+.lead-text{ font-size:14px; color:hsla(var(--foreground)/.85); }
+.lead-text strong{ color:hsl(var(--foreground)); }
+
+.contact-grid{ display:flex; flex-direction:column; gap:12px; }
+.contact-item{ display:flex; align-items:center; gap:14px; padding:16px 20px; max-width:480px; transition:border-color .25s, transform .25s; }
+.contact-item:hover{ border-color:rgba(99,102,241,.35); transform:translateX(6px); }
+.contact-item .icon{ font-size:18px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:rgba(99,102,241,.09); border-radius:9px; flex-shrink:0; }
+.contact-item .label{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:hsla(var(--foreground)/.62); }
+.contact-item .val{ color:hsl(var(--foreground)); }
+
+footer{ text-align:center; padding:32px 24px 44px; font-family:'JetBrains Mono',monospace; font-size:12px; color:hsla(var(--foreground)/.62); border-top:1px solid rgba(255,255,255,.06); }
+
+@media(max-width:640px){
+  .nav-center{ display:none; }
+  section.page-sec{ padding:64px 0 56px; }
+}
+@media(prefers-reduced-motion:reduce){
+  *{ animation-duration:.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero-wrap">
+  <video class="hero-video" id="heroVideo" muted playsinline preload="auto">
+    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4" type="video/mp4">
+  </video>
+
+  <section class="hero-section">
+    <div class="hero-blur-shape"></div>
+
+    <nav>
+      <div class="nav-logo">
+        <div class="nav-logo-badge">SV</div>
+        <div class="nav-logo-text">Sachin Verma</div>
+      </div>
+      <div class="nav-center">
+        <button data-target="about">About</button>
+        <button data-target="projects">Projects</button>
+        <button data-target="achievements">Achievements</button>
+        <button data-target="contact">Contact</button>
+      </div>
+      <a href="#contact" class="btn-hero" style="padding:8px 18px;">Get in touch</a>
+    </nav>
+    <div class="nav-divider"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-headline">
+        <span class="plain">Sachin Verma</span>
+      </h1>
+      <h1 class="hero-headline hero-headline-sub">
+        <span class="grad">Full Stack Developer</span>
+      </h1>
+      <p class="hero-sub">
+        Full-stack apps, automated workflows, and real-world AI —
+        built by a BCA (AI &amp; ML) student at Galgotias University.
+      </p>
+      <a href="#projects" class="btn-hero hero-cta">Schedule a Chat →</a>
+    </div>
+
+    <div class="marquee-row">
+      <div class="marquee-label">Tools I ship with<br>across every project</div>
+      <div class="marquee-mask">
+        <div class="marquee-track" id="marqueeTrack"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<main>
+
+<!-- ABOUT -->
+<section id="about" class="page-sec">
+  <div class="sec-meta"><span class="kw">import</span> { About } <span class="kw">from</span> './about'</div>
+  <h2 class="sec-title">About me</h2>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a <strong>BCA (AI &amp; Machine Learning)</strong> student at Galgotias University with hands-on experience in Python and Java application development. I build full-stack data applications, automate workflows, and apply core AI/ML and LLM concepts to real-world problems.
+      </p>
+      <p>
+        I'm seeking an entry-level role in <strong>data automation, analytics, or applied AI</strong> where I can support technical and business stakeholders with clean, reliable code.
+      </p>
+    </div>
+
+    <div class="glass-card">
+      <div class="skills-cat">
+        <div class="skills-cat-label">Languages</div>
+        <div class="skills">
+          <span class="skill-chip">Python</span><span class="skill-chip">Java</span>
+          <span class="skill-chip">C</span><span class="skill-chip">C++</span><span class="skill-chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="skills-cat">
+        <div class="skills-cat-label">Web &amp; Frameworks</div>
+        <div class="skills">
+          <span class="skill-chip">HTML/CSS</span><span class="skill-chip">React.js</span>
+          <span class="skill-chip">Node.js</span><span class="skill-chip">Express</span>
+        </div>
+      </div>
+      <div class="skills-cat">
+        <div class="skills-cat-label">AI, Data &amp; Tools</div>
+        <div class="skills">
+          <span class="skill-chip">ML/AI</span><span class="skill-chip">LLMs</span><span class="skill-chip">SQL</span>
+          <span class="skill-chip">DSA</span><span class="skill-chip">Git/GitHub</span><span class="skill-chip">JWT/Bcrypt</span>
+          <span class="skill-chip">Illustrator</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:44px;">
+    <div class="sec-meta" style="margin-bottom:16px;"><span class="kw">const</span> education = [</div>
+    <div class="info-cards">
+      <div class="info-card glass-card">
+        <h4>BCA (AI &amp; Machine Learning)</h4>
+        <div class="sub">Galgotias University, Greater Noida</div>
+        <div class="desc">2023 – 2026 (Expected)</div>
+      </div>
+      <div class="info-card glass-card">
+        <h4>Senior Secondary (XII)</h4>
+        <div class="sub">Kids Paradise Senior Secondary School</div>
+        <div class="desc">2023</div>
+      </div>
+    </div>
+    <div class="sec-meta" style="margin-top:8px;">]</div>
+  </div>
+
+  <div style="margin-top:24px;">
+    <div class="sec-meta" style="margin-bottom:16px;"><span class="kw">const</span> certifications = [</div>
+    <div class="info-cards">
+      <div class="info-card glass-card">
+        <h4>Networking Essentials</h4>
+        <div class="sub">Cisco NetAcad</div>
+      </div>
+      <a href="https://www.credly.com/badges/b120835b-3aba-45c9-8677-cbca1be8daaf/public_url" target="_blank" class="info-card glass-card" style="display:block;">
+        <h4>Data Analytics for Machine Learning</h4>
+        <div class="sub">IBM SkillsBuild · Issued Jul 05, 2026</div>
+        <div class="desc">Verify badge ↗</div>
+      </a>
+    </div>
+    <div class="sec-meta" style="margin-top:8px;">]</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="page-sec">
+  <div class="sec-meta"><span class="kw">export</span> const projects = [</div>
+  <h2 class="sec-title">Things I've built</h2>
+
+  <div class="project-grid">
+    <article class="glass-card">
+      <div class="project-name">Requify <span class="ext">.app</span></div>
+      <div class="project-desc">Full-stack real-estate web app with role-based access (User, Owner, Admin), JWT auth, bcrypt hashing, a RESTful API with protected routes, property search, and role-specific dashboards.</div>
+      <div class="project-techs"><span class="project-tech">nodejs</span><span class="project-tech">express</span><span class="project-tech">javascript</span><span class="project-tech">jwt</span><span class="project-tech">bcrypt</span></div>
+      <a href="https://github.com/Sachinverma12/Requify" target="_blank" class="project-link">View repo ↗</a>
+    </article>
+    <article class="glass-card">
+      <div class="project-name">Plants E-Commerce <span class="ext">.io</span></div>
+      <div class="project-desc">End-to-end e-commerce platform handling product listings, shopping cart, and order management, built with a React.js frontend and Java backend.</div>
+      <div class="project-techs"><span class="project-tech">java</span><span class="project-tech">react</span><span class="project-tech">html/css</span></div>
+      <a href="https://github.com/Sachinverma12/PLANECTOR-WEBSITE" target="_blank" class="project-link">View repo ↗</a>
+    </article>
+    <article class="glass-card">
+      <div class="project-name">Online Voting System</div>
+      <div class="project-desc">Secure voting application with session handling and authentication to prevent duplicate entries and ensure data integrity.</div>
+      <div class="project-techs"><span class="project-tech">java</span></div>
+    </article>
+    <article class="glass-card">
+      <div class="project-name">Restaurant Order System</div>
+      <div class="project-desc">Structured data-tracking and reporting system for orders and billing, supporting repeatable operational workflows.</div>
+      <div class="project-techs"><span class="project-tech">c++</span></div>
+    </article>
+    <article class="glass-card">
+      <div class="project-name">Java Calculator <span class="ext">.swing</span></div>
+      <div class="project-desc">GUI-based calculator with Swing, focusing on usability and reliable core arithmetic logic.</div>
+      <div class="project-techs"><span class="project-tech">java</span><span class="project-tech">swing</span></div>
+    </article>
+    <article class="glass-card">
+      <div class="project-name">Portfolio Website</div>
+      <div class="project-desc">Independently designed and deployed a public-facing personal website end-to-end.</div>
+      <div class="project-techs"><span class="project-tech">html</span><span class="project-tech">css</span><span class="project-tech">javascript</span></div>
+    </article>
+  </div>
+  <div class="sec-meta" style="margin-top:18px;">]</div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="page-sec">
+  <div class="sec-meta"><span class="kw">const</span> achievements = [</div>
+  <h2 class="sec-title">Leadership &amp; Achievements</h2>
+
+  <div class="lead-grid">
+    <div class="lead-item glass-card"><div class="lead-icon">🏆</div><div class="lead-text"><strong>Team Captain</strong> — Galgotias University Kabaddi Team</div></div>
+    <div class="lead-item glass-card"><div class="lead-icon">🥇</div><div class="lead-text"><strong>Gold Medalist</strong> — State Kabaddi Championship</div></div>
+    <div class="lead-item glass-card"><div class="lead-icon">🥊</div><div class="lead-text"><strong>Letter of Appreciation</strong> — Boxing Federation of India (World Boxing Championship)</div></div>
+    <div class="lead-item glass-card"><div class="lead-icon">💡</div><div class="lead-text"><strong>Volunteer</strong> — Smart India Hackathon</div></div>
+    <div class="lead-item glass-card"><div class="lead-icon">🌍</div><div class="lead-text"><strong>Volunteer</strong> — World Boxing Championship, Greater Noida</div></div>
+    <div class="lead-item glass-card"><div class="lead-icon">🗣️</div><div class="lead-text"><strong>Hindi</strong> (Native) · <strong>English</strong> (Professional)</div></div>
+  </div>
+  <div class="sec-meta" style="margin-top:12px;">]</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="page-sec">
+  <div class="sec-meta">#!/bin/bash</div>
+  <h2 class="sec-title">Let's connect</h2>
+
+  <div class="contact-grid">
+    <a href="mailto:sachinvermadineshpur@gmail.com" class="contact-item glass-card">
+      <div class="icon">✉</div><div><div class="label">email</div><div class="val">sachinvermadineshpur@gmail.com</div></div>
+    </a>
+    <a href="tel:+916397455504" class="contact-item glass-card">
+      <div class="icon">📞</div><div><div class="label">phone</div><div class="val">+91 6397455504</div></div>
+    </a>
+    <a href="https://github.com/sachinverma12" target="_blank" class="contact-item glass-card">
+      <div class="icon">⌨</div><div><div class="label">github</div><div class="val">github.com/sachinverma12</div></div>
+    </a>
+    <a href="https://www.linkedin.com/in/sachin-verma-b1b951270" target="_blank" class="contact-item glass-card">
+      <div class="icon">🔗</div><div><div class="label">linkedin</div><div class="val">linkedin.com/in/sachin-verma-b1b951270</div></div>
+    </a>
+    <div class="contact-item glass-card" style="cursor:default;">
+      <div class="icon">📍</div><div><div class="label">location</div><div class="val">Noida, Uttar Pradesh</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>built with html, css &amp; javascript — © 2026 Sachin Verma</footer>
+
+<script>
+// ===== Hero video fade loop =====
+const video = document.getElementById('heroVideo');
+let fadeStart = null;
+const FADE_MS = 500;
+
+function fadeIn(ts){
+  if(fadeStart === null) fadeStart = ts;
+  const p = Math.min(1, (ts - fadeStart) / FADE_MS);
+  video.style.opacity = p;
+  if(p < 1) requestAnimationFrame(fadeIn);
+}
+function fadeOutThenReplay(ts){
+  if(fadeStart === null) fadeStart = ts;
+  const p = Math.min(1, (ts - fadeStart) / FADE_MS);
+  video.style.opacity = 1 - p;
+  if(p < 1){ requestAnimationFrame(fadeOutThenReplay); }
+  else {
+    video.style.opacity = 0;
+    setTimeout(() => { video.currentTime = 0; video.play(); }, 100);
+  }
+}
+video.addEventListener('play', () => { fadeStart = null; requestAnimationFrame(fadeIn); });
+video.addEventListener('timeupdate', () => {
+  if(video.duration && video.duration - video.currentTime <= FADE_MS/1000 && fadeStart === null){
+    fadeStart = null;
+    requestAnimationFrame(fadeOutThenReplay);
+  }
+});
+video.addEventListener('ended', () => {
+  video.style.opacity = 0;
+  setTimeout(() => { video.currentTime = 0; video.play(); }, 100);
+});
+video.play().catch(() => { /* autoplay blocked or source unavailable — dark hero still renders fine */ });
+
+// ===== Marquee content =====
+const tools = [
+  { n:'Python', c:'#3776ab' }, { n:'Java', c:'#e76f00' }, { n:'React', c:'#61dafb' },
+  { n:'Node.js', c:'#3c873a' }, { n:'SQL', c:'#a855f7' }, { n:'Git', c:'#f05133' }
+];
+const track = document.getElementById('marqueeTrack');
+function renderTools(){
+  return tools.map(t => `
+    <div class="marquee-item">
+      <div class="marquee-icon liquid-glass" style="background:${t.c}22;">${t.n[0]}</div>
+      <div class="marquee-name">${t.n}</div>
+    </div>`).join('');
+}
+track.innerHTML = renderTools() + renderTools();
+
+// ===== Nav scroll =====
+document.querySelectorAll('.nav-center button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior:'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
